@@ -8,19 +8,45 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { BgImage } from "../assets";
+import { apiRequest } from "../utils";
+import { UserLogin } from "../redux/userSlice";
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "onChange" });
-
-  const onSubmit = async (data) => {};
-
   const [errMsg, setErrMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    watch,
+    formState: { errors },
+  } = useForm({ mode: "onChange" });
+
+  const onSubmit = async (data) => {
+    setIsSubmitting(true);
+    setErrMsg("");
+    try {
+      const res = await apiRequest({
+        url: "/auth/login",
+        data: data,
+        method: "POST",
+      });
+
+      if (res?.status === "failed") {
+        setErrMsg(res);
+      } else {
+        setErrMsg("");
+
+        const newData = { token: res?.token, ...res?.user };
+        dispatch(UserLogin(newData));
+        window.location.replace("/");
+      }
+      setIsSubmitting(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="bg-bgColor w-full h-[100vh] flex items-center justify-center p-6">
