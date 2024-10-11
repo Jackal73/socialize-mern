@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SetPosts } from "../redux/postSlice";
 const API_URL = "http://localhost:8800";
 export const API = axios.create({
   baseURL: API_URL,
@@ -42,3 +43,34 @@ export const handleFileUpload = async (uploadFile) => {
     console.log(error);
   }
 };
+export const fetchPosts = async (token, dispatch, uri, data) => {
+  try {
+    const res = await apiRequest({
+      url: uri || "/posts",
+      token: token,
+      method: "POST",
+      data: data || {},
+    });
+
+    dispatch(SetPosts(res?.data));
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export async function fetchPosts(token, dispatch, uri, data) {
+//   try {
+//     const res = await apiRequest({
+//       url: uri || "/posts",
+//       token: token,
+//       method: "POST",
+//       data: data || {},
+//     });
+
+//     dispatch(SetPosts(res?.data));
+//     return;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
