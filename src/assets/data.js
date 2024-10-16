@@ -88,7 +88,7 @@ export const friends = [
   },
   {
     _id: "64df39704180b81adfe41d0b",
-    firstName: "James",
+    firstName: "Jimmy",
     lastName: "Jackson",
     email: "james@gmail.com",
     location: "Mumbai, India",
@@ -156,7 +156,7 @@ export const posts = [
     _id: "64e1cdd64baffca670364c8c",
     userId: {
       _id: "64df39704180b81adfe41d0b",
-      firstName: "Love",
+      firstName: "Lilly",
       lastName: "Banks",
       profileUrl:
         "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874454/samples/people/boy-snow-hoodie.jpg",
