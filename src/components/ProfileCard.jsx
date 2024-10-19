@@ -69,7 +69,7 @@ const ProfileCard = ({ user }) => {
         <div className="w-full flex flex-col gap-2 py-4 border-b border-[#66666645]">
           <div className="flex items-center justify-between">
             <span className="text-ascent-2">Joined</span>
-            <span className="text-ascent-1 text-base">
+            <span className="text-ascent-2 text-base">
               {moment(user?.createdAt).fromNow()}
             </span>
           </div>
@@ -78,7 +78,7 @@ const ProfileCard = ({ user }) => {
               {user?.verified ? "Verified Account" : "Not Verified"}
             </span>
           </div>
-          <p className="text-lg text-ascent-1 font-semibold mb-2">
+          <p className="text-lg text-ascent-1 mb-2">
             {user?.friends?.length} Friends
           </p>
 
@@ -94,7 +94,7 @@ const ProfileCard = ({ user }) => {
 
         {/* Social profile */}
         <div className="w-full flex flex-col gap-4 py-4 pb-6">
-          <p className="text-ascent-1 text-lg font-semibold">Social Profile</p>
+          <p className="text-ascent-1 text-lg">Social Profile</p>
           <div className="flex gap-2 items-center text-ascent-2">
             <FaLink className=" text-xl text-ascent-1" />
             {/* https://lynkx.vercel.app/Jackal73 */}

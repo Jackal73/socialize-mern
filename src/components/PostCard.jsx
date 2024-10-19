@@ -271,7 +271,7 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
         </p>
         {user?._id === post?.userId?._id && (
           <div
-            className="flex gap-1 items-center text-base text-[#f87171] cursor-pointer"
+            className="flex gap-1 items-center text-base text-[#f64949fe] cursor-pointer"
             onClick={() => deletePost(post?._id)}
           >
             <MdOutlineDeleteOutline size={20} />

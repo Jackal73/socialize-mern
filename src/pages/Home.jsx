@@ -175,11 +175,9 @@ const Home = () => {
                 <img
                   src={user?.profileUrl ?? NoProfile}
                   alt="User"
-                  // className="w-14 h-14 rounded-full object-cover mt-3"
                   className="sm:w-14 sm:h-12 w-10 h-8 object-cover rounded-full mt-3"
                 />
                 <TextInput
-                  // styles="w-full rounded-full py-4"
                   styles="w-full rounded-full md:py-4 py-2"
                   placeholder="What's on your mind..."
                   name="description"
@@ -284,9 +282,9 @@ const Home = () => {
           <div className="hidden w-1/4 h-full lg:flex flex-col gap-6 overflow-y-auto">
             {/* FRIEND REQUEST */}
             <div className="w-full bg-primary shadow-sm rounded-xl px-6 py-5">
-              <div className="flex items-center justify-between text-xl text-ascent-1 pb-2 border-b border-[#66666645]">
+              <div className="flex items-center justify-between text-lg text-ascent-1 pb-2 border-b border-[#66666645]">
                 <span className="">Friend Requests</span>
-                {/* <span className="">{friendRequest?.length}</span> */}
+                <span className="">{friendRequest?.length}</span>
               </div>
               <div className="w-full flex flex-col gap-4 pt-4">
                 {friendRequest?.map(({ _id, requestFrom: from }) => (
@@ -329,7 +327,7 @@ const Home = () => {
             <div className="w-full bg-primary shadow-sm rounded-xl px-5 py-5">
               <div className="pb-2 flex items-center justify-between text-lg text-ascent-1 border-b border-[#66666645]">
                 <span className="">Friend Suggestions</span>
-                {/* <span className="">{friendRequest?.length}</span> */}
+                <span className="">{friendRequest?.length}</span>
               </div>
               <div className="w-full flex flex-col gap-4 pt-4">
                 {suggestedFriends?.map((friend) => (

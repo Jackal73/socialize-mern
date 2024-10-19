@@ -39,7 +39,7 @@ const TopBar = () => {
           <BsFillChatQuoteFill className="" size={18} />
         </div>
         <span
-          className="text-2xl text-[#065ad8] [text-shadow:_3px_3px_2px_rgb(6_90_216/_60%)]"
+          className="text-lg sm:text-2xl text-[#065ad8] [text-shadow:_3px_3px_2px_rgb(6_90_216/_60%)]"
           font-semibold="true"
         >
           S͛OͦCͨIͥAͣLiͥzeͤ
@@ -76,7 +76,7 @@ const TopBar = () => {
           <CustomButton
             onClick={() => dispatch(Logout())}
             title="Log Out"
-            containerStyles="text-sm text-ascent-1 px-2 md:px-4 py-1 md:py-1 border border-[#065ad8] rounded-full shadow-md shadow-[3px_3px_2px_0_rgb(6_90_216/_40%)] active:shadow-none"
+            containerStyles="text-xs md:text-sm text-ascent-1 px-2 md:px-4 py-1 md:py-1 border border-[#065ad8] rounded-full shadow-md shadow-[3px_3px_2px_0_rgb(6_90_216/_40%)] active:shadow-none"
           />
         </div>
       </div>
