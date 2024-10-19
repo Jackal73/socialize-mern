@@ -120,3 +120,16 @@ export const getUserInfo = async (token, id) => {
     console.log(error);
   }
 };
+export const sendFriendRequest = async (token, id) => {
+  try {
+    const res = await apiRequest({
+      url: "/users/friend-request",
+      token: token,
+      method: "POST",
+      data: { requestTo: id },
+    });
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+};
