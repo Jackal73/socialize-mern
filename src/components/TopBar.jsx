@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { SetTheme } from "../redux/theme";
 import { Logout } from "../redux/userSlice";
+import { fetchPosts } from "../utils";
 
 const TopBar = () => {
   const { theme } = useSelector((state) => state.theme);
@@ -27,16 +28,18 @@ const TopBar = () => {
     dispatch(SetTheme(themeValue));
   };
 
-  const handleSearch = async (data) => {};
+  const handleSearch = async (data) => {
+    await fetchPosts(user.token, dispatch, "", data);
+  };
 
   return (
-    <div className="topbar w-full flex items-center justify-between py-3 md:py-6 px-4 bg-primary">
+    <div className="topbar w-full flex items-center justify-between py-3 md:py-6 px-4 bg-primary rounded-xl">
       <Link to="/" className="flex gap-2 items-center mt-2">
-        <div className="p-2 mb-[4px] bg-[#065ad8] rounded-lg text-white shadow-[3px_3px_2px_0_rgb(6_90_216/_60%)]">
+        <div className="p-1 mb-[4px] bg-[#065ad8] rounded-lg text-white shadow-[3px_3px_2px_0_rgb(6_90_216/_60%)]">
           <BsFillChatQuoteFill className="" size={18} />
         </div>
         <span
-          className="text-3xl text-[#065ad8] [text-shadow:_3px_3px_2px_rgb(6_90_216/_60%)]"
+          className="text-2xl text-[#065ad8] [text-shadow:_3px_3px_2px_rgb(6_90_216/_60%)]"
           font-semibold="true"
         >
           S͛OͦCͨIͥAͣLiͥzeͤ
