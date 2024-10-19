@@ -13,7 +13,12 @@ import { useForm } from "react-hook-form";
 import { BiImages, BiSolidVideo } from "react-icons/bi";
 import {
   apiRequest,
+  deletePost,
   fetchPosts,
+  getUserInfo,
+  handleFileUpload,
+  likePost,
+  sendFriendRequest,
 } from "../utils";
 import { UserLogin } from "../redux/userSlice";
 
@@ -37,6 +42,53 @@ const Home = () => {
   const fetchPost = async () => {
     await fetchPosts(user.token, dispatch);
     setLoading(false);
+  };
+
+  const handlePostSubmit = async (data) => {
+    setPosting(true);
+    setErrMsg("");
+    try {
+      const uri = file && (await handleFileUpload(file));
+
+      const newData = uri ? { ...data, image: uri } : data;
+
+      const res = await apiRequest({
+        url: "/posts/create-post",
+        data: newData,
+        token: user?.token,
+        method: "POST",
+      });
+
+      if (res?.status === "failed") {
+        setErrMsg(res);
+      } else {
+        reset({
+          description: "",
+        });
+        setFile(null);
+        setErrMsg("");
+        await fetchPost();
+      }
+      setPosting(false);
+    } catch (error) {
+      console.log(error);
+      setPosting(false);
+    }
+  };
+  const handleLikePost = async (uri) => {
+    await likePost({ uri: uri, token: user?.token });
+
+    await fetchPost();
+  };
+
+  const handleDelete = async (id) => {
+    await deletePost(id, user.token);
+    await fetchPost();
+  };
+  const getUser = async () => {
+    const res = await getUserInfo(user?.token);
+    const newData = { token: user?.token, ...res };
+    dispatch(UserLogin(newData));
   };
   return (
     <>
@@ -142,6 +194,23 @@ const Home = () => {
                 </div>
               </div>
             </form>
+            {loading ? (
+              <Loading />
+            ) : posts?.length > 0 ? (
+              posts?.map((post) => (
+                <PostCard
+                  key={post?._id}
+                  post={post}
+                  user={user}
+                  deletePost={handleDelete}
+                  likePost={handleLikePost}
+                />
+              ))
+            ) : (
+              <div className="flex w-full h-full items-center justify-center">
+                <p className="text-lg text-ascent-2">No Post Available</p>
+              </div>
+            )}
           </div>
 
           {/* RIGHT */}
@@ -149,6 +218,8 @@ const Home = () => {
             {/* FRIEND REQUEST */}
             <div className="w-full bg-primary shadow-sm rounded-xl px-6 py-5">
               <div className="flex items-center justify-between text-xl text-ascent-1 pb-2 border-b border-[#66666645]">
+                <span className="">Friend Requests</span>
+                {/* <span className="">{friendRequest?.length}</span> */}
               </div>
               <div className="w-full flex flex-col gap-4 pt-4">
               </div>
