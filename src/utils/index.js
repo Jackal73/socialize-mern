@@ -1,10 +1,13 @@
 import axios from "axios";
 import { SetPosts } from "../redux/postSlice";
+
 const API_URL = "http://localhost:8800";
+
 export const API = axios.create({
   baseURL: API_URL,
   responseType: "json",
 });
+
 export const apiRequest = async ({ url, token, data, method }) => {
   try {
     const result = await API(url, {
@@ -43,6 +46,7 @@ export const handleFileUpload = async (uploadFile) => {
     console.log(error);
   }
 };
+
 export const fetchPosts = async (token, dispatch, uri, data) => {
   try {
     const res = await apiRequest({
@@ -74,6 +78,7 @@ export const fetchPosts = async (token, dispatch, uri, data) => {
 //     console.log(error);
 //   }
 // }
+
 export const likePost = async ({ uri, token }) => {
   try {
     const res = await apiRequest({
@@ -99,6 +104,7 @@ export const deletePost = async (id, token) => {
     console.log(error);
   }
 };
+
 export const getUserInfo = async (token, id) => {
   try {
     const uri = id === undefined ? "/users/get-user" : "/users/get-user/" + id;
@@ -120,6 +126,7 @@ export const getUserInfo = async (token, id) => {
     console.log(error);
   }
 };
+
 export const sendFriendRequest = async (token, id) => {
   try {
     const res = await apiRequest({
@@ -127,6 +134,20 @@ export const sendFriendRequest = async (token, id) => {
       token: token,
       method: "POST",
       data: { requestTo: id },
+    });
+    return;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const viewUserProfile = async (token, id) => {
+  try {
+    const res = await apiRequest({
+      url: "/users/profile-view",
+      token: token,
+      method: "POST",
+      data: { id },
     });
     return;
   } catch (error) {
