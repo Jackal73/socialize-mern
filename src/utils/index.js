@@ -99,3 +99,24 @@ export const deletePost = async (id, token) => {
     console.log(error);
   }
 };
+export const getUserInfo = async (token, id) => {
+  try {
+    const uri = id === undefined ? "/users/get-user" : "/users/get-user/" + id;
+
+    const res = await apiRequest({
+      url: uri,
+      token: token,
+      method: "POST",
+    });
+
+    if (res?.message === "Authentication failed") {
+      localStorage.removeItem("user");
+      window.alert("User session expired. Login again.");
+      window.location.replace("/login");
+    }
+
+    return res?.user;
+  } catch (error) {
+    console.log(error);
+  }
+};
