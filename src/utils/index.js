@@ -74,3 +74,28 @@ export const fetchPosts = async (token, dispatch, uri, data) => {
 //     console.log(error);
 //   }
 // }
+export const likePost = async ({ uri, token }) => {
+  try {
+    const res = await apiRequest({
+      url: uri,
+      token: token,
+      method: "POST",
+    });
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deletePost = async (id, token) => {
+  try {
+    const res = await apiRequest({
+      url: "/posts/" + id,
+      token: token,
+      method: "DELETE",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
