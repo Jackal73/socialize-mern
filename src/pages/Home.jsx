@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CustomButton,
+  EditProfile,
   Loading,
   PostCard,
   ProfileCard,
@@ -78,6 +79,7 @@ const Home = () => {
       setPosting(false);
     }
   };
+
   const handleLikePost = async (uri) => {
     await likePost({ uri: uri, token: user?.token });
 
@@ -88,6 +90,7 @@ const Home = () => {
     await deletePost(id, user.token);
     await fetchPost();
   };
+
   const fetchFriendRequests = async () => {
     try {
       const res = await apiRequest({
@@ -368,6 +371,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {edit && <EditProfile />}
     </>
   );
 };
